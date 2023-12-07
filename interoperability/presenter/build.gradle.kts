@@ -62,21 +62,21 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(project(":interoperability:domain"))
+    implementation("com.test.pe.domain:interoperability:1.0")
 }
 publishing {
     publications.create<MavenPublication>("lib") {
         groupId = "com.test.pe"
-        artifactId = "Interoperability"
-        version = "1"
+        artifactId = "interoperability"
+        version = "1.0"
         artifact("$buildDir/outputs/aar/presenter-release.aar")
     }
 
-    repositories.maven("http://test.maven.github.com/interoperability") {
+    repositories.maven("https://maven.pkg.github.com/pasuchi/library_interoperability") {
         name = "GitPackegs"
         credentials {
-            username = System.getenv("Git")
-            password = System.getenv("token")
+            username = "Pasuchi"
+            password = "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"
         }
     }
 

@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("maven-publish")
 }
 
 android {
@@ -43,3 +44,23 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
+
+publishing {
+    publications.create<MavenPublication>("lib") {
+        groupId = "com.test.pe.domain"
+        artifactId = "interoperability"
+        version = "1.0"
+        artifact("$buildDir/outputs/aar/domain-release.aar")
+    }
+
+    repositories.maven("https://maven.pkg.github.com/pasuchi/library_interoperability") {
+        name = "GitPackegs"
+        credentials {
+            username = "Pasuchi"
+            password = "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"
+        }
+    }
+
+}
+
+
