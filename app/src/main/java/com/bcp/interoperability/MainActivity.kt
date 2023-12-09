@@ -3,6 +3,7 @@ package com.bcp.interoperability
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -29,7 +30,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
                     val vm: ListContactsViewModel = hiltViewModel()
                     ListConstactsScreen(
                         onTexChange = vm::getTextInput,

@@ -52,7 +52,6 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.5.4")
     implementation(libs.bundles.compose)
     implementation("androidx.compose.material:material:1.5.4")
-
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.test.junit4)
     debugImplementation(libs.ui.tooling)
@@ -62,13 +61,18 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.test.pe.domain:interoperability:1.0")
+    api(project(":domain-aar"))
+
+    //implementation(project(path = ":domain-aar",configuration = "default"))
 }
+
+
+
 publishing {
     publications.create<MavenPublication>("lib") {
         groupId = "com.test.pe"
         artifactId = "interoperability"
-        version = "1.0"
+        version = "1.3"
         artifact("$buildDir/outputs/aar/presenter-release.aar")
     }
 

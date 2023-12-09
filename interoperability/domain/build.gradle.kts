@@ -5,6 +5,7 @@ plugins {
     id("maven-publish")
 }
 
+
 android {
     namespace = "com.bcp.domain"
     compileSdk = 34
@@ -49,7 +50,7 @@ publishing {
     publications.create<MavenPublication>("lib") {
         groupId = "com.test.pe.domain"
         artifactId = "interoperability"
-        version = "1.0"
+        version = "1.0.3"
         artifact("$buildDir/outputs/aar/domain-release.aar")
     }
 
