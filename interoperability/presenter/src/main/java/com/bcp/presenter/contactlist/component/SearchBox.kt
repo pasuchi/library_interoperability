@@ -1,4 +1,4 @@
-package com.bcp.presenter.component
+package com.bcp.presenter.contactlist.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

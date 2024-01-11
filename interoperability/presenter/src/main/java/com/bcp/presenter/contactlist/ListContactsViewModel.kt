@@ -1,10 +1,9 @@
-package com.bcp.presenter
+package com.bcp.presenter.contactlist
 
 import android.app.Application
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.loader.app.LoaderManager
@@ -12,10 +11,7 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.bcp.domain.FilterContactUsecase
 import com.bcp.domain.model.ContactModel
-import com.bcp.presenter.event.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

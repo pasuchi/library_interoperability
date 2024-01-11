@@ -1,4 +1,4 @@
-package com.bcp.presenter
+package com.bcp.presenter.contactlist
 
 import android.Manifest
 import android.util.Log
@@ -17,8 +17,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.bcp.domain.model.ContactModel
-import com.bcp.presenter.component.ListContactInteroperability
-import com.bcp.presenter.component.SearchBox
+import com.bcp.presenter.contactlist.component.ListContactInteroperability
+import com.bcp.presenter.contactlist.component.SearchBox
 
 
 @Composable
@@ -26,7 +26,8 @@ fun ListConstactsScreen(
     onTexChange: (String) -> Unit,
     listContacts: List<ContactModel>,
     textValue: String,
-    initLoaderManager: () -> Unit
+    initLoaderManager: () -> Unit,
+    nextScreen: () -> Unit
 ) {
 
     val launchContactPermission = rememberLauncherForActivityResult(
@@ -44,7 +45,7 @@ fun ListConstactsScreen(
 
     Column(modifier = Modifier) {
         SearchBox(onTexChange = onTexChange, textValue = textValue)
-        ListContactInteroperability(listContacts)
+        ListContactInteroperability(listContacts,nextScreen)
     }
 
 

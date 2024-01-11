@@ -1,4 +1,4 @@
-package com.bcp.presenter.event
+package com.bcp.presenter.contactlist.event
 
 import com.bcp.domain.model.ContactModel
 
