@@ -9,6 +9,7 @@ const val AREA_CODE = "51"
 const val AREA_CODE_PLUS = "+51"
 
 
+
 class FilterContactUsecase @Inject constructor() {
 
     private val listConstacts = mutableListOf<ContactModel>()

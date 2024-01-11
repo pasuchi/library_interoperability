@@ -14,6 +14,7 @@ import com.bcp.domain.FilterContactUsecase
 import com.bcp.domain.model.ContactModel
 import com.bcp.presenter.event.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,12 +28,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListContactsViewModel @Inject constructor(
-    private val application: Application,
     private val filterUserCase: FilterContactUsecase,
-    private val dispacher: CoroutineDispatcher = Dispatchers.IO
+    private val application: Application
 ) : ViewModel() {
 
-    val uiState = mutableStateOf(UiState())
     private val _allListContats = MutableStateFlow(emptyList<ContactModel>())
     private val allListContats = _allListContats.asStateFlow()
     private val _searchText = MutableStateFlow("")
@@ -64,15 +63,15 @@ class ListContactsViewModel @Inject constructor(
             return CursorLoader(
                 application.applicationContext,
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                projectionFields,  // projection fields
-                null,  // the selection criteria
-                null,  // the selection args
+                projectionFields,
+                null,
+                null,
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME.plus(" ASC")
             )
         }
 
         override fun onLoadFinished(loader: Loader<Cursor?>, data: Cursor?) {
-            viewModelScope.launch(dispacher) {
+            viewModelScope.launch(Dispatchers.IO) {
                 this.runCatching {
                     _allListContats.value = filterUserCase(data)
                     loader.reset()

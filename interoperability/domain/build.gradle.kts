@@ -38,30 +38,25 @@ android {
 dependencies {
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.compiler)
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.10.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
 
 publishing {
     publications.create<MavenPublication>("lib") {
         groupId = "com.test.pe.domain"
         artifactId = "interoperability"
-        version = "1.0.3"
+        version = "1.0.7"
         artifact("$buildDir/outputs/aar/domain-release.aar")
     }
 
-    repositories.maven("https://maven.pkg.github.com/pasuchi/library_interoperability") {
-        name = "GitPackegs"
+    repositories.maven("https://maven.pkg.github.com/.../library_interoperability") {
+        name = "..."
         credentials {
-            username = "Pasuchi"
-            password = "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"
+            username = "..."
+            password = "..."
         }
     }
 
 }
+
 
 

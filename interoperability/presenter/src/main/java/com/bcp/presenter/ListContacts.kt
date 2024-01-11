@@ -1,6 +1,7 @@
 package com.bcp.presenter
 
 import android.Manifest
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.bcp.domain.model.ContactModel
+import com.bcp.presenter.component.ListContactInteroperability
+import com.bcp.presenter.component.SearchBox
 
 
 @Composable
@@ -33,29 +36,15 @@ fun ListConstactsScreen(
             initLoaderManager()
         }
     }
-
-    LaunchedEffect(key1 = true, block = {
+    LaunchedEffect(key1 = true, {
         launchContactPermission.launch(Manifest.permission.READ_CONTACTS)
+
     })
 
-    Column {
 
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth().padding(start = 24.dp, end = 24.dp),
-                    value = textValue,
-            onValueChange = onTexChange
-        )
-        LazyColumn {
-
-            items(listContacts) {
-                Column {
-                    Text(text = it.name, modifier = Modifier.padding(top = 5.dp))
-                    Text(text = it.number, modifier = Modifier.padding(top = 5.dp, bottom = 5.dp))
-                    Divider(thickness = 0.5.dp)
-                }
-
-            }
-        }
+    Column(modifier = Modifier) {
+        SearchBox(onTexChange = onTexChange, textValue = textValue)
+        ListContactInteroperability(listContacts)
     }
 
 

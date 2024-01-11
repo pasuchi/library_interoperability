@@ -13,7 +13,6 @@ android {
         minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -30,7 +29,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-
     kotlinOptions {
         jvmTarget = "17"
     }
@@ -45,13 +43,13 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.compose.bom))
-    implementation("androidx.compose.material:material-icons-extended:1.5.4")
     implementation(libs.bundles.compose)
-    implementation("androidx.compose.material:material:1.5.4")
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.test.junit4)
     debugImplementation(libs.ui.tooling)
@@ -61,27 +59,39 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    api(project(":domain-aar"))
+    api(project(":interoperability:domain"))
+   // implementation(files("./libs/domain-release.aar"))
 
     //implementation(project(path = ":domain-aar",configuration = "default"))
 }
-
 
 
 publishing {
     publications.create<MavenPublication>("lib") {
         groupId = "com.test.pe"
         artifactId = "interoperability"
-        version = "1.3"
-        artifact("$buildDir/outputs/aar/presenter-release.aar")
-    }
+        version = "1.22"
+        //artifact("$buildDir/outputs/aar/presenter-release.aar")
 
-    repositories.maven("https://maven.pkg.github.com/pasuchi/library_interoperability") {
-        name = "GitPackegs"
-        credentials {
-            username = "Pasuchi"
-            password = "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"
-        }
+      /*  pom.withXml {
+            asNode().appendNode("dependencies").apply {
+                this.appendNode("dependency").apply {
+                    this.appendNode("groupId", "com.test.pe.domain")
+                    this.appendNode("artifactId", "interoperability")
+                    this.appendNode("version", "1.0.7")
+                }
+            }
+        }*/
+
+
     }
+ /*
+    repositories.maven("https://maven.pkg.github.com/../library_interoperability") {
+        name = "..."
+        credentials {
+            username = "..."
+            password = ".."
+        }
+    }*/
 
 }
