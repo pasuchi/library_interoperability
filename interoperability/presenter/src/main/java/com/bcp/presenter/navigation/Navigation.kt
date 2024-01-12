@@ -12,7 +12,6 @@ import com.bcp.presenter.banklist.BankList
 @Composable
 fun Navigation(componentActivity: ComponentActivity) {
     val navController = rememberNavController()
-
     NavHost(
         navController = navController,
         startDestination = "contacts"
@@ -28,9 +27,7 @@ fun Navigation(componentActivity: ComponentActivity) {
             NewScreen()
         }
         composable(route = Route.selectBanks) {
-            //val vm: BankListViewModel = hiltViewModel()
             BankList()
-
         }
         composable(route = Route.amountPayment) {
 

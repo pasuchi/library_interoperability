@@ -48,6 +48,9 @@ fun ContactsScreen(
             Column(modifier = Modifier) {
                 SearchBox(onTexChange = {
                     textSearchBox = it
+
+
+
                 }, textValue = textSearchBox)
 
                 ListContactInteroperability(
