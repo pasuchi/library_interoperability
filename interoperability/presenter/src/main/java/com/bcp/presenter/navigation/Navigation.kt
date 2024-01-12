@@ -5,8 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.bcp.presenter.ContactsScreen
+import com.bcp.presenter.contactlist.ContactsScreen
 import com.bcp.presenter.NewScreen
+import com.bcp.presenter.banklist.BankList
 
 @Composable
 fun Navigation(componentActivity: ComponentActivity) {
@@ -17,10 +18,22 @@ fun Navigation(componentActivity: ComponentActivity) {
         startDestination = "contacts"
     ) {
         composable("contacts") {
-            ContactsScreen(componentActivity = componentActivity)
+            ContactsScreen(
+                componentActivity = componentActivity,
+                goToSelectBanks = {
+                    navController.navigate(Route.selectBanks)
+                })
         }
         composable("new") {
             NewScreen()
+        }
+        composable(route = Route.selectBanks) {
+            //val vm: BankListViewModel = hiltViewModel()
+            BankList()
+
+        }
+        composable(route = Route.amountPayment) {
+
         }
     }
 }

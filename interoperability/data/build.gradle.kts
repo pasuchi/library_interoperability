@@ -1,5 +1,6 @@
 plugins {
     id("com.android.library")
+    id("kotlin-kapt")
     id("org.jetbrains.kotlin.android")
 }
 
@@ -35,6 +36,8 @@ android {
 
 
 dependencies {
+    implementation(libs.bundles.hilt)
+    kapt(libs.hilt.compiler)
     implementation(libs.androidx.core.ktx)
     api(project(":interoperability:domain"))
 
