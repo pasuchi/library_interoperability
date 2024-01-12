@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -26,9 +25,6 @@ import androidx.loader.content.Loader
 import com.bcp.domain.model.ContactModel
 import com.bcp.presenter.contactlist.component.ListContactInteroperability
 import com.bcp.presenter.contactlist.component.SearchBox
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
 
 @Composable
 fun ContactsScreen(
@@ -37,74 +33,66 @@ fun ContactsScreen(
     goToSelectBanks: () -> Unit
 ) {
 
-    HandlerEffect(componentActivity) { initLoader ->
+    val uiState: ContactsUiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    var textSearchBox by rememberSaveable { mutableStateOf("") }
+    var contactsListAll by rememberSaveable { mutableStateOf(listOf<ContactModel>()) }
+
+    HandlerEffect(
+        componentActivity = componentActivity,
+        textSearchBox = textSearchBox, contactsListAll = contactsListAll
+    ) { initLoader ->
         viewModel.loadContactsIntent(initLoader)
     }
 
-    val uiState: ContactsUiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    var searchListValue by remember {
-        mutableStateOf(listOf<ContactModel>())
-    }
-
-    var textSeachbox by rememberSaveable {
-        mutableStateOf("")
-    }
-
-    var showView by rememberSaveable {
-        mutableStateOf(false)
-    }
-
-    val contactsListAll by rememberSaveable {
-        mutableStateOf(mutableListOf<ContactModel>())
-    }
-    LaunchedEffect(key1 = textSeachbox, block = {
-
-        if (textSeachbox.isBlank() || textSeachbox.isEmpty()) {
-            searchListValue = contactsListAll
-
-        } else {
-            val rr = contactsListAll.filter { contact ->
-                contact.name matchTextInput textSeachbox || contact.number matchTextInput textSeachbox
-            }
-            Log.i("TAGS", "ContactsScreen: " + rr)
-            searchListValue = rr
-
-        }
-    })
-
-    LaunchedEffect(key1 = uiState) {
-        when (uiState) {
-            is ContactsUiState.RenderContacts -> {
-                contactsListAll.clear()
-                contactsListAll.addAll((uiState as ContactsUiState.RenderContacts).contacts)
-                searchListValue = (uiState as ContactsUiState.RenderContacts).contacts
-                showView = true
-            }
-
-            is ContactsUiState.Error -> Unit
-        }
-    }
-
-    if (showView) {
-        Column(modifier = Modifier) {
-            SearchBox(onTexChange = {
-                textSeachbox = it
-            }, textValue = textSeachbox)
-
-            ListContactInteroperability(
-                listContacts = searchListValue,
-                nextScreen = goToSelectBanks
+    when (uiState) {
+        is ContactsUiState.RenderContacts -> {
+            textSearchBox = ""
+            contactsListAll = (uiState as ContactsUiState.RenderContacts).contacts
+            RenderContacts(
+                textSearchBox = textSearchBox,
+                onTextChange = { textSearchBox = it },
+                contacts = contactsListAll,
+                goToSelectBanks = goToSelectBanks
             )
         }
+
+        is ContactsUiState.RenderFilterContacts -> {
+            val contacts = (uiState as ContactsUiState.RenderFilterContacts).contacts
+            RenderContacts(
+                textSearchBox = textSearchBox,
+                onTextChange = { textSearchBox = it },
+                contacts = contacts,
+                goToSelectBanks = goToSelectBanks
+            )
+        }
+
+        is ContactsUiState.Error -> Unit
     }
-
-
 }
+
+@Composable
+private fun RenderContacts(
+    textSearchBox: String,
+    onTextChange: (String) -> Unit,
+    contacts: List<ContactModel>,
+    goToSelectBanks: () -> Unit
+) {
+    Column(modifier = Modifier) {
+        SearchBox(onTexChange = onTextChange, textValue = textSearchBox)
+        ListContactInteroperability(
+            listContacts = contacts,
+            nextScreen = goToSelectBanks
+        )
+    }
+}
+
 
 @Composable
 private fun HandlerEffect(
     componentActivity: ComponentActivity,
+    textSearchBox: String,
+    contactsListAll: List<ContactModel>,
     loadContactsIntent: (ContactsIntent) -> Unit
 ) {
 
@@ -147,6 +135,20 @@ private fun HandlerEffect(
     LaunchedEffect(key1 = true) {
         launchContactPermission.launch(Manifest.permission.READ_CONTACTS)
     }
+
+    LaunchedEffect(key1 = textSearchBox, block = {
+        Log.i("TAGS", "ContactsScreen: " + textSearchBox)
+        if (textSearchBox.isBlank() || textSearchBox.isEmpty()) {
+            Log.i("TAGS", "ContactsScreen: " + textSearchBox)
+            loadContactsIntent.invoke(ContactsIntent.FilterContacts(contactsListAll))
+        } else {
+            val filterContacts = contactsListAll.filter { contact ->
+                contact.name matchTextInput textSearchBox || contact.number matchTextInput textSearchBox
+            }
+            Log.i("TAGS", "ContactsScreen: " + filterContacts)
+            loadContactsIntent.invoke(ContactsIntent.FilterContacts(filterContacts))
+        }
+    })
 }
 
 private infix fun String.matchTextInput(valueToMatch: String): Boolean {
