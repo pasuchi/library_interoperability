@@ -1,0 +1,23 @@
+# Build application fiels
+/build/
+/*/build
+
+# Local configuration files (sdk path, etc)
+#local.properties
+
+# Gradle generated files
+.gradle/
+.gragle/*
+#gradle/
+gradlew
+gradlew.bat
+
+# User-specific configurations
+.idea/
+*.iml
+
+# OS-specific configurations
+.DS_Store
+
+# git
+

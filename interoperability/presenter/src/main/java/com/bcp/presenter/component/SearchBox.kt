@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SearchBox(  onTexChange: (String) -> Unit,textValue: String,) {
+fun SearchBox(onTexChange: (String) -> Unit, textValue: String) {
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()

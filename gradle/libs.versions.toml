@@ -15,7 +15,9 @@ appcompat = "1.6.1"
 material = "1.10.0"
 constraintlayout = "2.1.4"
 org-jetbrains-kotlin-jvm = "1.8.10"
-
+composeNavigation = "2.5.3"
+composeViewModelLifecycle = "2.5.1"
+composeRuntimeLifecycle = "2.6.0"
 
 [libraries]
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom-version" }
@@ -23,6 +25,10 @@ compose-ui = { module = "androidx.compose.ui:ui" }
 compose-graphics = { module = "androidx.compose.ui:ui-graphics" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
+
+compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
+compose-viewmodel-lifecycle = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeViewModelLifecycle"}
+compose-runtime-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "composeRuntimeLifecycle"}
 
 test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
@@ -45,7 +51,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [bundles]
-compose = ["compose-ui","compose-graphics","compose-ui-tooling-preview","compose-material3"]
+compose = ["compose-ui","compose-graphics","compose-ui-tooling-preview","compose-material3", "compose-navigation", "compose-viewmodel-lifecycle", "compose-runtime-lifecycle"]
 hilt = ["hilt-android","hilt-navigation-compose"]
 
 [plugins]
