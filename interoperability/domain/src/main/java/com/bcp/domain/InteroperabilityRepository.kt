@@ -1,11 +1,11 @@
 package com.bcp.domain
 
-import com.bcp.domain.model.BankModel
+import com.bcp.domain.model.Bank
 import kotlinx.coroutines.flow.Flow
 
 interface InteroperabilityRepository {
 
-    fun getListOwnBanks(): Flow<List<BankModel>>
-    fun getListOtherBanks():Flow<List<BankModel>>
+    fun getListOwnBanks(): Flow<List<Bank>>
+    fun getListOtherBanks():Flow<List<Bank>>
 
 }

@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bcp.presenter.contactlist.ContactsScreen
 import com.bcp.presenter.NewScreen
-import com.bcp.presenter.banklist.BankList
+import com.bcp.presenter.banklist.BanksScreen
 
 @Composable
 fun Navigation(componentActivity: ComponentActivity) {
@@ -27,7 +27,7 @@ fun Navigation(componentActivity: ComponentActivity) {
             NewScreen()
         }
         composable(route = Route.selectBanks) {
-            BankList()
+            BanksScreen()
         }
         composable(route = Route.amountPayment) {
 
