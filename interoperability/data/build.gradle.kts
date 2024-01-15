@@ -39,6 +39,6 @@ dependencies {
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.core.ktx)
-    api(project(":interoperability:domain"))
+    implementation(project(":interoperability:domain"))
 
 }

@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.compose.bom))
@@ -60,7 +61,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    api(project(":interoperability:domain"))
+    implementation(project(":interoperability:domain"))
    // implementation(files("./libs/domain-release.aar"))
 
     //implementation(project(path = ":domain-aar",configuration = "default"))

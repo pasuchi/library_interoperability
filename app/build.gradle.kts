@@ -72,6 +72,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     api(project(":interoperability:presenter"))
+    implementation(project(":interoperability:data"))
+    implementation(project(":interoperability:domain"))
 
     //implementation(libs.interoperability)
 

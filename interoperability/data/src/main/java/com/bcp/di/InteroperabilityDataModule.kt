@@ -1,24 +1,20 @@
 package com.bcp.di
 
 import com.bcp.data.InteroperabilityRepositoryImpl
-import com.bcp.data.remote.InteroperabilityBanksDataStore
-import com.bcp.data.remote.InteroperabilityBanksDataStoreImpl
 import com.bcp.domain.InteroperabilityRepository
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
-
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)
-interface InteroperabilityDataModule {
-    @ViewModelScoped
-    @Binds
-    abstract fun bindInteroperabilitydataStore(impl: InteroperabilityBanksDataStoreImpl): InteroperabilityBanksDataStore
-    @ViewModelScoped
-    @Binds
-    abstract fun bindInteroperabilityRepository(impl: InteroperabilityRepositoryImpl): InteroperabilityRepository
+@InstallIn(SingletonComponent::class)
+object InteroperabilityDataModule {
+
+    @Singleton
+    @Provides
+    fun provideRepo() :InteroperabilityRepository = InteroperabilityRepositoryImpl()
+
 
 }
