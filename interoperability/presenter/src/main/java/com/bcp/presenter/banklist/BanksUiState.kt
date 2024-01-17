@@ -1,7 +1,8 @@
 package com.bcp.presenter.banklist
 
-sealed class BanksUiState {
-    object ShowShimmer : BanksUiState()
-    data class RenderBanks(val data: List<BankModel>): BanksUiState()
-    data class Error(val message: String) : BanksUiState()
-}
+import com.bcp.presenter.banklist.modelui.BankModel
+
+data class BanksUiState(
+    val isLoaderShimmer: Boolean = false,
+    val listBank: List<BankModel> = emptyList()
+)

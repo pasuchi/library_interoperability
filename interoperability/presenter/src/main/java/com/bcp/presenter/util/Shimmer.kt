@@ -29,25 +29,31 @@ import androidx.compose.ui.unit.dp
 
 @Preview
 @Composable
-fun ShimmerList(
-    modifier: Modifier = Modifier
+fun Shimmer(
+    isLoading: Boolean = true,
+    modifier: Modifier = Modifier,
+    contentAfterLoading: @Composable () -> Unit = {},
 ) {
-    Column(modifier = Modifier.padding(top = 24.dp, start = 24.dp, end = 24.dp)) {
-        Spacer(
-            modifier = Modifier
-                .height(24.dp)
-                .width(100.dp)
-                .clip(RoundedCornerShape(5.dp))
-                .shimmerEffect()
-        )
-        Spacer(modifier = Modifier.padding(top = 10.dp))
-        Spacer(
-            modifier = Modifier
-                .height(24.dp)
-                .width(200.dp)
-                .clip(RoundedCornerShape(5.dp))
-                .shimmerEffect()
-        )
+    if (isLoading) {
+        Column(modifier = Modifier.padding(top = 24.dp, start = 24.dp, end = 24.dp)) {
+            Spacer(
+                modifier = Modifier
+                    .height(24.dp)
+                    .width(100.dp)
+                    .clip(RoundedCornerShape(5.dp))
+                    .shimmerEffect()
+            )
+            Spacer(modifier = Modifier.padding(top = 10.dp))
+            Spacer(
+                modifier = Modifier
+                    .height(24.dp)
+                    .width(200.dp)
+                    .clip(RoundedCornerShape(5.dp))
+                    .shimmerEffect()
+            )
+        }
+    } else {
+        contentAfterLoading()
     }
 }
 
