@@ -39,20 +39,19 @@ dependencies {
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.compiler)
 }
-
 publishing {
     publications.create<MavenPublication>("lib") {
         groupId = "com.test.pe.domain"
         artifactId = "interoperability"
-        version = "1.0.7"
+        version = "1.0.9"
         artifact("$buildDir/outputs/aar/domain-release.aar")
     }
 
-    repositories.maven("https://maven.pkg.github.com/.../library_interoperability") {
-        name = "..."
+    repositories.maven("https://maven.pkg.github.com/pasuchi/library_interoperability") {
+        name = "GitPackegs"
         credentials {
-            username = "..."
-            password = "..."
+            username = "Pasuchi"
+            password = "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"
         }
     }
 

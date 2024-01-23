@@ -61,39 +61,39 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(project(":interoperability:domain"))
-   // implementation(files("./libs/domain-release.aar"))
+    implementation("com.test.pe.domain:interoperability:1.0.9")
+
+    // implementation(files("./libs/domain-release.aar"))
 
     //implementation(project(path = ":domain-aar",configuration = "default"))
 }
-
 
 publishing {
     publications.create<MavenPublication>("lib") {
         groupId = "com.test.pe"
         artifactId = "interoperability"
-        version = "1.22"
-        //artifact("$buildDir/outputs/aar/presenter-release.aar")
+        version = "1.24"
+        artifact("$buildDir/outputs/aar/presenter-release.aar")
 
-      /*  pom.withXml {
-            asNode().appendNode("dependencies").apply {
-                this.appendNode("dependency").apply {
-                    this.appendNode("groupId", "com.test.pe.domain")
-                    this.appendNode("artifactId", "interoperability")
-                    this.appendNode("version", "1.0.7")
-                }
-            }
-        }*/
+          pom.withXml {
+              asNode().appendNode("dependencies").apply {
+                  this.appendNode("dependency").apply {
+                      this.appendNode("groupId", "com.test.pe.domain")
+                      this.appendNode("artifactId", "interoperability")
+                      this.appendNode("version", "1.0.9")
+                  }
+              }
+          }
 
 
     }
- /*
-    repositories.maven("https://maven.pkg.github.com/../library_interoperability") {
-        name = "..."
-        credentials {
-            username = "..."
-            password = ".."
-        }
-    }*/
+
+       repositories.maven("https://maven.pkg.github.com/pasuchi/library_interoperability") {
+           name = "GitPackegs"
+           credentials {
+               username = "Pasuchi"
+               password = "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"
+           }
+       }
 
 }

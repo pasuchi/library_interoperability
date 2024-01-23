@@ -17,7 +17,7 @@ dependencyResolutionManagement {
                 url = uri("https://maven.pkg.github.com/pasuchi/library_interoperability")
                 credentials {
                     username = "Pasuchi"
-                    password = "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"
+                    password = "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"
                 }
             }
         }
