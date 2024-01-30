@@ -17,7 +17,7 @@ dependencyResolutionManagement {
                 url = uri("https://maven.pkg.github.com/pasuchi/library_interoperability")
                 credentials {
                     username = "Pasuchi"
-                    password = "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"
+                    password = "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"
                 }
             }
         }
@@ -27,7 +27,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Interoperability"
 include(":app")
-include(":interoperability")
-include(":interoperability:domain")
-include(":interoperability:data")
-include(":interoperability:presenter")
+include(":interop")
